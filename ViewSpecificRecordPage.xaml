@@ -1,0 +1,55 @@
+﻿<Page x:Class="CPE106_FOPI01_RAYNES_MOD3_EXAM.ViewSpecificRecordPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CPE106_FOPI01_RAYNES_MOD3_EXAM"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="500"
+      Title="ViewSpecificRecordPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="View Specific Record" Grid.Column="1" 
+                   FontSize="20" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" Foreground="LightCoral"
+                   FontWeight="ExtraBold"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Search using person ID or student ID" Foreground="Coral" Margin="0 5" FontStyle="Italic"/>
+
+            <Grid Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Person ID to search:" Foreground="Coral" Margin="0 0 5 0" Grid.Column="0"/>
+                <TextBox x:Name="TBPersonID" MinWidth="200" Text="Type Person ID to look for" Grid.Column="1"
+                         Margin="5 0"/>
+                <Button x:Name="SearchBttn" Grid.Column="2" Margin="5,0,5,0" Content="Search" Click="SearchBttn_Click"/>
+            </Grid>
+
+            <Grid Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Student ID to search:" Foreground="Coral" Margin="0 0 5 0" Grid.Column="0"/>
+                <TextBox x:Name="TBStudentID" MinWidth="200" Text="Type Student ID to look for" Grid.Column="1"
+                         Margin="5 0"/>
+                <Button x:Name="SearchBttn2" Grid.Column="2" Margin="5,0,5,0" Content="Search" Height="20" VerticalAlignment="Top" Click="SearchBttn2_Click" />
+            </Grid>
+            
+            <DataGrid ItemsSource="{Binding}" x:Name="checkDtGrid" Height="65" Margin="50 0">
+            </DataGrid>
+
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="StudentMaintenance" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BEEPBOOPMACHINE\SQL2022_SCHOOL;Initial Catalog=StudentMaintenance;Integrated Security=True" SettingsObjectName="CPE106_FOPI01_RAYNES_MOD3_EXAM.Properties.Settings" SettingsPropertyName="StudentMaintenanceConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Person" Member="Persons">
+    <Type Name="Person">
+      <Column Name="Person_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Last_Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Given_Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Middle_Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Person_Student" Member="Students" ThisKey="Person_ID" OtherKey="Person_ID" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Program" Member="Programs">
+    <Type Name="Program">
+      <Column Name="Program_ID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Program_Description" Type="System.String" DbType="NChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="Program_Student" Member="Students" ThisKey="Program_ID" OtherKey="Program_ID" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Student" Member="Students">
+    <Type Name="Student">
+      <Column Name="Student_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Student_Number" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Year" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Person_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Program_ID" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Association Name="Person_Student" Member="Person" ThisKey="Person_ID" OtherKey="Person_ID" Type="Person" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Program_Student" Member="Program" ThisKey="Program_ID" OtherKey="Program_ID" Type="Program" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Function Name="dbo.spViewStudentDetailed" Method="spViewStudentDetailed">
+    <Parameter Name="studentID_toView" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spViewStudentDetailedResult">
+      <Column Name="Last_Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Given_Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Middle_Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Student_Number" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Program_Description" Type="System.String" DbType="NChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Year" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spViewStudent" Method="spViewStudent">
+    <Parameter Name="studentID_toView" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spViewStudentResult">
+      <Column Name="Student_Number" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Program_ID" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Year" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spViewProgram" Method="spViewProgram">
+    <Parameter Name="programID_toView" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spViewProgramResult">
+      <Column Name="Program_Description" Type="System.String" DbType="NChar(200) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spViewPerson" Method="spViewPerson">
+    <Parameter Name="personID_toView" Type="System.Int32" DbType="Int" />
+    <ElementType Name="spViewPersonResult">
+      <Column Name="Last_Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Given_Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Middle_Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.spEditStudent" Method="spEditStudent">
+    <Parameter Name="studentID_toEdit" Type="System.Int32" DbType="Int" />
+    <Parameter Name="inpStudentNum" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="inpProgramID" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="inpYear" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spEditProgram" Method="spEditProgram">
+    <Parameter Name="programID_toEdit" Type="System.Int32" DbType="Int" />
+    <Parameter Name="inpProgramDesc" Type="System.String" DbType="NChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spEditPerson" Method="spEditPerson">
+    <Parameter Name="personID_toEdit" Type="System.Int32" DbType="Int" />
+    <Parameter Name="inpLastName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="inpGivenName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="inpMiddleName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDeleteStudentDetailed" Method="spDeleteStudentDetailed">
+    <Parameter Name="personID_toDelete" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDeleteStudent" Method="spDeleteStudent">
+    <Parameter Name="studentID_toDelete" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDeleteProgram" Method="spDeleteProgram">
+    <Parameter Name="programID_toDelete" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spDeletePerson" Method="spDeletePerson">
+    <Parameter Name="personID_toDelete" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddStudent" Method="spAddStudent">
+    <Parameter Name="personID_toAddTo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="inpStudentNum" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="inpProgramID" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="inpYear" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddProgram" Method="spAddProgram">
+    <Parameter Name="inpProgramDesc" Type="System.String" DbType="NChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.spAddPerson" Method="spAddPerson">
+    <Parameter Name="inpLastName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="inpGivenName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="inpMiddleName" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

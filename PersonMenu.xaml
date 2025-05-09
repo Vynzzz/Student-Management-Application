@@ -1,0 +1,30 @@
+﻿<Page x:Class="CPE106_FOPI01_RAYNES_MOD3_EXAM.PersonMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CPE106_FOPI01_RAYNES_MOD3_EXAM"
+      mc:Ignorable="d" 
+      d:DesignHeight="100" d:DesignWidth="800"
+      Title="PersonMenu">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        
+        <Button x:Name="AddPersonBttn" Width="100" Height="30" Margin="5" Grid.Column="0" Click="AddPersonBttn_Click">
+            <TextBlock Text="Add Person"/>
+        </Button>
+        <Button x:Name="EditPersonBttn" Width="100" Height="30" Margin="5" Grid.Column="1" Click="EditPersonBttn_Click">
+            <TextBlock Text="Edit Person"/>
+        </Button>
+        <Button x:Name="DeletePersonBttn" Width="100" Height="30" Margin="5" Grid.Column="2" Click="DeletePersonBttn_Click">
+            <TextBlock Text="Delete Person"/>
+        </Button>
+
+    </Grid>
+</Page>
